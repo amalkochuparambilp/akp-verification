@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Sending</title>
+</head>
+<body>
+  <h2>Enter your phone number to receive OTP:</h2>
+  <form id="otpForm">
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required>
+    <button type="button" onclick="sendOTP()">Send OTP</button>
+  </form>
+
+  <script>
+    function sendOTP() {
+      // Make an API call to send OTP
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      // Replace 'your-api-endpoint' with the actual API endpoint for sending OTP
+      fetch('Nzk3OTUzNjQ1MDcyNTY3NjM2MzkzODU4Mzk2OTRiNmE=/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phoneNumber }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('OTP sent successfully!');
+        } else {
+          alert('Failed to send OTP. Please try again.');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
